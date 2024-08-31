@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styles - Your Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Your Marketplace</a>
+            </div>
+            <nav class="nav-left">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trending.html">Trending</a></li>
+                    <li><a href="styles.html">Styles</a></li>
+                </ul>
+            </nav>
+            <nav class="nav-right">
+                <ul>
+                    <li><a href="signup.html">Signup</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <section id="styles-section">
+            <h2>Explore Our Styles</h2>
+            <div id="styles-container" class="styles-container">
+                <!-- Styles will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 Your Marketplace. All rights reserved.</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="trending.html">Trending</a>
+            <a href="styles.html">Styles</a>
+            <a href="signup.html">Signup</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </footer>
+
+    <!-- JavaScript to dynamically load styles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch styles from the backend API
+            fetch('http://localhost:5000/api/styles')
+                .then(response => response.json())
+                .then(styles => {
+                    const stylesContainer = document.getElementById('styles-container');
+
+                    // Clear any existing styles
+                    stylesContainer.innerHTML = '';
+
+                    // Iterate over each style and create the HTML elements
+                    styles.forEach(style => {
+                        const styleCard = document.createElement('div');
+                        styleCard.classList.add('style-card');
+
+                        styleCard.innerHTML = `
+                            <img src="${style.imageUrl}" alt="${style.name}">
+                            <h3>${style.name}</h3>
+                            <p>${style.description}</p>
+                        `;
+
+                        stylesContainer.appendChild(styleCard);
+                    });
+                })
+                .catch(error => console.error('Error fetching styles:', error));
+        });
+    </script>
+
+</body>
+
+</html>

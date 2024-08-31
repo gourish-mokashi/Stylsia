@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Your Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Stylsia</a>
+            </div>
+            <nav class="nav-left">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="trending.html">Trending</a></li>
+                    <li><a href="styles.html">Styles</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+            <nav class="nav-right">
+                <ul>
+                    <li><a href="signup.html">Signup</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h2>Discover Your Unique Style</h2>
+        <p>Find the latest trends and create your own fashion statement. Start shopping now!</p>
+        <a href="trending.html" class="cta-button">Shop Trending Styles</a>
+    </section>
+
+    <!-- Featured Styles Section -->
+    <section id="featured-styles">
+        <h2>Featured Styles</h2>
+        <div class="style-card">
+            <a href="products.html" class="style-link">
+                <img src="images/old-money.jpg" alt="Old Money Style"></a>
+            <h3>Old Money Style</h3>
+            <p>Elegant and timeless pieces that speak of sophistication and grace.</p>
+
+        </div>
+        <div class="style-card">
+            <a href="products.html" class="style-link">
+                <img src="images/streetwear.jpg" alt="Streetwear"></a>
+            <h3>Streetwear</h3>
+            <p>Bold, edgy outfits that make a statement on the streets while you walk.</p>
+
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section id="new-arrivals">
+        <h2>New Arrivals</h2>
+        <div class="product-card">
+            <a href="product.html" class="style-link">
+                <img src="images/new1.jpg" alt="Product 1"></a>
+            <h3>Casual Denim Jacket</h3>
+            <p>$49.99</p>
+            <a href="product.html" class="buy-now">Buy Now</a>
+        </div>
+        <div class="product-card">
+            <a href="product.html" class="style-link">
+                <img src="images/new2.jpg" alt="Product 2"></a>
+            <h3>Floral Summer Dress</h3>
+            <p>$39.99</p>
+            <a href="product.html" class="buy-now">Buy Now</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>What Our Customers Say</h2>
+        <blockquote>
+            <p>"I love the unique styles available on Your Marketplace! It's my go-to place for finding outfits that
+                match my personality."</p>
+            <cite>- Sarah J.</cite>
+        </blockquote>
+        <blockquote>
+            <p>"Great quality and fast delivery. Highly recommend this platform to anyone looking for stylish clothes!"
+            </p>
+            <cite>- Michael K.</cite>
+        </blockquote>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 Your Marketplace. All rights reserved.</p>
+
+        <div class="social-icons">
+            <a href="#"><img src="images/facebook-icon.svg" alt="Facebook"></a>
+            <a href="#"><img src="images/instagram-icon.svg" alt="Instagram"></a>
+            <a href="#"><img src="images/twitter-icon.svg" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script>
+        // Function to fetch products from the backend
+        async function fetchProducts() {
+            try {
+                const response = await fetch('http://localhost:5000/api/products');
+                const products = await response.json();
+
+                // Get the container element where products will be displayed
+                const productsContainer = document.getElementById('products-container');
+
+                // Clear existing content
+                productsContainer.innerHTML = '';
+
+                // Loop through products and add to the DOM
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <p>Price: $${product.price}</p>
+                    `;
+                    productsContainer.appendChild(productCard);
+                });
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        }
+
+        // Call the function to fetch products when the page loads
+        window.onload = fetchProducts;
+    </script>
+
+</body>
+
+</html>

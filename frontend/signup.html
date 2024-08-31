@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Your Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Your Marketplace</a>
+            </div>
+            <nav class="nav-left">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trending.html">Trending</a></li>
+                    <li><a href="styles.html">Styles</a></li>
+                </ul>
+            </nav>
+            <nav class="nav-right">
+                <ul>
+
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Main Content Section -->
+    <main>
+        <section id="signup-section">
+            <h2>Create an Account</h2>
+            <form id="signupForm" method="post">
+                <label for="name">name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required><br><br>
+                <input type="submit" value="Signup">
+            </form>
+            <script>
+                document.getElementById('signupForm').addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match!");
+                        return;
+                    }
+
+                    const response = await fetch('http://localhost:5000/api/auth/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, email, password })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert("Signup successful!");
+                        window.location.href = 'login.html';
+                    } else {
+                        alert(data.message || "Signup failed. Please try again.");
+                    }
+                });
+            </script>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 Your Marketplace. All rights reserved.</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="trending.html">Trending</a>
+            <a href="styles.html">Styles</a>
+            <a href="signup.html">Signup</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </footer>
+
+</body>
+
+</html>

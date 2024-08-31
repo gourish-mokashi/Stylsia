@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Your Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Your Marketplace</a>
+            </div>
+            <nav class="nav-left">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trending.html">Trending</a></li>
+                    <li><a href="styles.html">Styles</a></li>
+                </ul>
+            </nav>
+            <nav class="nav-right">
+                <ul>
+                    <li><a href="signup.html">Signup</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Main Content Section -->
+    <main>
+        <section id="login-section">
+            <h2>Login to Your Account</h2>
+            <form id="loginForm" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <input type="submit" value="Login">
+            </form>
+            <p id="loginError" style="color:red;"></p>
+            <!-- Add this script to your login.html -->
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', async (event) => {
+                    event.preventDefault();  // Prevent default form submission
+
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+
+                    try {
+                        const response = await fetch('http://localhost:5000/api/auth/login', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ email, password }),
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            alert('Login successful');
+                            // You can store the token or navigate to another page
+                            // localStorage.setItem('token', data.token);
+                            window.location.href = 'index.html'; // Redirect to home page after successful login
+                        } else {
+                            document.getElementById('loginError').innerText = data.message || 'Error logging in. Please try again.';
+                        }
+                    } catch (error) {
+                        document.getElementById('loginError').innerText = 'An error occurred. Please try again.';
+                        console.error('Error:', error);
+                    }
+                });
+
+            </script>
+
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 Your Marketplace. All rights reserved.</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="trending.html">Trending</a>
+            <a href="styles.html">Styles</a>
+            <a href="signup.html">Signup</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Your Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Stylsia</a>
+            </div>
+            <nav class="nav-left">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trending.html">Trending</a></li>
+                    <li><a href="styles.html">Styles</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+            <nav class="nav-right">
+                <ul>
+                    <li><a href="signup.html">Signup</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Main Content: Product Details -->
+    <main>
+        <section class="product-details">
+            <div class="product-gallery">
+                <img src="images/product1.jpg" alt="Product Image" class="product-image">
+            </div>
+
+            <div class="product-info">
+                <h1>Product Name</h1>
+                <p><strong>Product Code:</strong> P12345</p>
+                <p><strong>Seller Name:</strong> Fashion Hub</p>
+                <p><strong>Average Rating:</strong> ⭐⭐⭐⭐☆ (4.5)</p>
+                <p><strong>No. of People Who Bought It:</strong> 234</p>
+                <p><strong>Price:</strong> <span class="old-price">$39.99</span> $29.99</p>
+                <p><strong>Discount:</strong> 25% Off</p>
+                
+                <!-- Size and Color Options -->
+                <div class="product-options">
+                    <div class="option">
+                        <label for="size">Size:</label>
+                        <select id="size">
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">Extra Large</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="color">Color:</label>
+                        <select id="color">
+                            <option value="Red">Red</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Green">Green</option>
+                            <option value="Black">Black</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="buttons">
+                    <button class="buy-button">Buy Now</button>
+                    <button class="cart-button">Add to Cart</button>
+                    <button class="wishlist-button">Add to Wishlist</button>
+                </div>
+                
+                <!-- Share Button -->
+                <div class="share">
+                    <button class="share-button">Share</button>
+                </div>
+
+                <!-- Product Details -->
+                <div class="product-description">
+                    <h2>Product Details</h2>
+                    <p>Detailed description of the product goes here. Include material, dimensions, and any other relevant information.</p>
+                </div>
+
+                <!-- About the Item -->
+                <div class="about-item">
+                    <h2>About the Item</h2>
+                    <p>Information about the item's history, design, or inspiration goes here.</p>
+                </div>
+
+                <!-- About the Seller -->
+                <div class="about-seller">
+                    <h2>About the Seller</h2>
+                    <p>Details about the seller, their history, customer service, and more.</p>
+                </div>
+
+                <!-- Enter Your Address -->
+                <div class="address">
+                    <h2>Enter Your Address</h2>
+                    <input type="text" placeholder="Enter your delivery address" class="address-input">
+                    <button class="address-button">Check Availability</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Ratings and Reviews -->
+        <section class="customer-reviews">
+            <h2>Customer Ratings and Reviews</h2>
+            <div class="reviews">
+                <div class="review">
+                    <p><strong>John Doe</strong> ⭐⭐⭐⭐⭐</p>
+                    <p>Great product! Highly recommend.</p>
+                </div>
+                <!-- Add more reviews as needed -->
+            </div>
+        </section>
+
+        <!-- Similar Products -->
+        <section class="similar-products">
+            <h2>Similar Products</h2>
+            <div class="product-grid">
+                <!-- Example Product Card -->
+                <div class="product-card">
+                    <img src="images/product2.jpg" alt="Product Image">
+                    <div class="product-info">
+                        <h3>Similar Product Name</h3>
+                        <p>Price: $25.99</p>
+                        <button class="buy-button">View Product</button>
+                    </div>
+                </div>
+                <div class="product-grid">
+                    <!-- Example Product Card -->
+                    <div class="product-card">
+                        <img src="images/product2.jpg" alt="Product Image">
+                        <div class="product-info">
+                            <h3>Similar Product Name</h3>
+                            <p>Price: $25.99</p>
+                            <button class="buy-button">View Product</button>
+                        </div>
+                    </div>
+                <!-- Add more product cards as needed -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer Content -->
+        <p>&copy; 2024 Your Marketplace. All rights reserved.</p>
+    </footer>
+</body>
+</html>
