@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const UserActivity = require('../models/UserActivity');
 
 // Register a new user
 const signupUser = async (req, res) => {
@@ -72,4 +73,24 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser, getUserProfile, updateUserProfile };
+// Store user activity
+const storeUserActivity = async (req, res) => {
+  const {activityType, activityDetails, tags } = req.body;
+
+  try {
+      const activity = new UserActivity({
+          user: req.user.id,
+          activityType,
+          activityDetails,
+          tags  
+      });
+      await activity.save();
+      res.status(201).json({ message: 'Activity saved' });
+  } catch (error) {
+      console.error('Error saving activity:', error);
+      res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports = { signupUser, loginUser, getUserProfile, updateUserProfile, storeUserActivity  };

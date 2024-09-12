@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard | Stylsia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <h2>Stylsia</h2>
+        <ul>
+            <li><a href="#overview"><i class="fas fa-chart-line"></i> Dashboard Overview</a></li>
+            <li><a href="#product-management"><i class="fas fa-box-open"></i> Product Management</a></li>
+            <li><a href="#order-management"><i class="fas fa-shopping-cart"></i> Order Management</a></li>
+            <li><a href="#inventory-management"><i class="fas fa-warehouse"></i> Inventory Management</a></li>
+            <li><a href="#sales-analytics"><i class="fas fa-chart-bar"></i> Sales Analytics</a></li>
+            <li><a href="#customer-management"><i class="fas fa-users"></i> Customer Management</a></li>
+            <li><a href="#marketing-tools"><i class="fas fa-bullhorn"></i> Marketing Tools</a></li>
+            <li><a href="#financial-management"><i class="fas fa-dollar-sign"></i> Financial Management</a></li>
+            <li><a href="#account-settings"><i class="fas fa-cog"></i> Account Settings</a></li>
+            <li><a href="#support-help"><i class="fas fa-question-circle"></i> Support and Help Center</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Overview -->
+        <section id="overview" class="section">
+            <h2>Dashboard Overview</h2>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Total Sales</h3>
+                    <p>$12,345</p>
+                </div>
+                <div class="card">
+                    <h3>Total Orders</h3>
+                    <p>234</p>
+                </div>
+                <div class="card">
+                    <h3>Top Product</h3>
+                    <p>Stylish Jacket</p>
+                </div>
+                <div class="card">
+                    <h3>New Messages</h3>
+                    <p>5</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Management -->
+        <section id="product-management" class="section">
+            <h2>Product Management</h2>
+            <button class="btn">Add New Product</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stylish Jacket</td>
+                        <td>$99</td>
+                        <td>20</td>
+                        <td>Active</td>
+                        <td>
+                            <button class="btn-edit">Edit</button>
+                            <button class="btn-delete">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Add more products here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Order Management -->
+        <section id="order-management" class="section">
+            <h2>Order Management</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#12345</td>
+                        <td>John Doe</td>
+                        <td>2024-09-02</td>
+                        <td>Pending</td>
+                        <td>
+                            <button class="btn-process">Process</button>
+                            <button class="btn-cancel">Cancel</button>
+                        </td>
+                    </tr>
+                    <!-- Add more orders here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Inventory Management -->
+        <section id="inventory-management" class="section">
+            <h2>Inventory Management</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Stock Quantity</th>
+                        <th>Low Stock Alert</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stylish Jacket</td>
+                        <td>20</td>
+                        <td>5</td>
+                        <td><button class="btn-restock">Restock</button></td>
+                    </tr>
+                    <!-- Add more inventory items here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Sales Analytics -->
+        <section id="sales-analytics" class="section">
+            <h2>Sales Analytics</h2>
+            <div class="analytics-charts">
+                <!-- Placeholder for charts (use a library like Chart.js) -->
+                <div class="chart">Sales Chart</div>
+                <div class="chart">Top Products Chart</div>
+            </div>
+        </section>
+
+        <!-- Customer Management -->
+        <section id="customer-management" class="section">
+            <h2>Customer Management</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Email</th>
+                        <th>Total Orders</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>3</td>
+                        <td><button class="btn-message">Message</button></td>
+                    </tr>
+                    <!-- Add more customers here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Marketing Tools -->
+        <section id="marketing-tools" class="section">
+            <h2>Marketing Tools</h2>
+            <button class="btn">Create Discount Coupon</button>
+            <button class="btn">Launch Email Campaign</button>
+        </section>
+
+        <!-- Financial Management -->
+        <section id="financial-management" class="section">
+            <h2>Financial Management</h2>
+            <div class="finance-overview">
+                <div class="card">
+                    <h3>Total Earnings</h3>
+                    <p>$10,000</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Payouts</h3>
+                    <p>$2,345</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Settings -->
+        <section id="account-settings" class="section">
+            <h2>Account Settings</h2>
+            <div class="form-group">
+                <label for="store-name">Store Name</label>
+                <input type="text" id="store-name" placeholder="Enter Store Name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter Password">
+            </div>
+            <button class="btn">Update Settings</button>
+        </section>
+
+        <!-- Support and Help Center -->
+        <section id="support-help" class="section">
+            <h2>Support and Help Center</h2>
+            <p>Find answers to your questions or contact support for assistance.</p>
+            <button class="btn">Contact Support</button>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const sidebar = document.getElementById('sidebar');
+
+            hamburgerMenu.addEventListener('click', function () {
+                if (sidebar.style.left === '0px') {
+                    sidebar.style.left = '-250px'; // Hide sidebar
+                } else {
+                    sidebar.style.left = '0px'; // Show sidebar
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

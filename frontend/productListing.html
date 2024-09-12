@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Product</title>
+</head>
+
+<body>
+    <h1>Upload a New Product</h1>
+    <form id="productForm">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="productCode">Product Code:</label>
+        <input type="text" id="productCode" name="productCode" required><br><br>
+
+        <label for="sellerName">Seller Name:</label>
+        <input type="text" id="sellerName" name="sellerName" required><br><br>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br><br>
+
+        <label for="discount">Discount (%):</label>
+        <input type="number" id="discount" name="discount" required><br><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+
+        <label for="images">Image Filename:</label>
+        <input type="text" id="images" name="images" required><br><br>
+
+        <label for="tags">Tags/Keywords (comma-separated):</label>
+        <input type="text" id="tags" name="tags" placeholder="e.g. polo, black, old money" required><br><br>
+
+        <label for="stock">Stock Quantity:</label>
+        <input type="number" id="stock" name="stock" required><br><br>
+
+        <label for="sizes">Sizes (comma-separated):</label>
+        <input type="text" id="sizes" name="sizes" required><br><br>
+
+        <label for="colors">Colors (comma-separated):</label>
+        <input type="text" id="colors" name="colors" required><br><br>
+
+        <button type="submit">Upload Product</button>
+    </form>
+
+    <script>
+        document.getElementById('productForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                productCode: document.getElementById('productCode').value,
+                sellerName: document.getElementById('sellerName').value,
+                price: parseFloat(document.getElementById('price').value),
+                discount: parseFloat(document.getElementById('discount').value),
+                description: document.getElementById('description').value,
+                images: [document.getElementById('images').value],
+                tags: document.getElementById('tags').value.split(',').map(tag => tag.trim()),
+                stock: parseInt(document.getElementById('stock').value),
+                sizeOptions: document.getElementById('sizes').value.split(',').map(s => s.trim()),
+                colorOptions: document.getElementById('colors').value.split(',').map(c => c.trim())
+            };
+
+            fetch('http://localhost:5000/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Product uploaded successfully');
+                    console.log('Product uploaded:', data);
+                })
+                .catch(error => {
+                    alert('Error uploading product');
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>

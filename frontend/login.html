@@ -41,7 +41,8 @@
                 <input type="submit" value="Login">
             </form>
             <p id="loginError" style="color:red;"></p>
-            <!-- Add this script to your login.html -->
+
+
             <script>
                 document.getElementById('loginForm').addEventListener('submit', async (event) => {
                     event.preventDefault();  // Prevent default form submission
@@ -62,8 +63,13 @@
 
                         if (response.ok) {
                             alert('Login successful');
-                            // You can store the token or navigate to another page
-                            // localStorage.setItem('token', data.token);
+                            // Store the token and user details in localStorage
+                            localStorage.setItem('token', data.token);  // Save JWT token
+                            localStorage.setItem('user', JSON.stringify({
+                                _id: data._id,
+                                name: data.name,
+                                email: data.email,
+                            }));
                             window.location.href = 'index.html'; // Redirect to home page after successful login
                         } else {
                             document.getElementById('loginError').innerText = data.message || 'Error logging in. Please try again.';

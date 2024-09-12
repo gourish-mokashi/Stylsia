@@ -7,6 +7,27 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   //isAdmin: { type: Boolean, required: true, default: false }
+  // Reference to user activity for recommendations
+  viewedProducts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+   }],
+  wishlist: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    }],
+  cart: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    }],
+  purchases: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+   }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Encrypt password before saving

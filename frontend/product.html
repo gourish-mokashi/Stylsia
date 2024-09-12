@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Your Marketplace</title>
+    <title>Product Page - Stylsia</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <div class="header-container">
@@ -32,12 +34,11 @@
         </div>
     </header>
 
-
     <!-- Main Content: Product Details -->
     <main>
         <section class="product-details">
             <div class="product-gallery">
-                <img src="images/product1.jpg" alt="Product Image" class="product-image">
+                <img src="images/product-placeholder.jpg" alt="Product Image" class="product-image">
             </div>
 
             <div class="product-info">
@@ -48,25 +49,19 @@
                 <p><strong>No. of People Who Bought It:</strong> 234</p>
                 <p><strong>Price:</strong> <span class="old-price">$39.99</span> $29.99</p>
                 <p><strong>Discount:</strong> 25% Off</p>
-                
+
                 <!-- Size and Color Options -->
                 <div class="product-options">
                     <div class="option">
                         <label for="size">Size:</label>
                         <select id="size">
-                            <option value="S">Small</option>
-                            <option value="M">Medium</option>
-                            <option value="L">Large</option>
-                            <option value="XL">Extra Large</option>
+                            <!-- Size options will be populated dynamically -->
                         </select>
                     </div>
                     <div class="option">
                         <label for="color">Color:</label>
                         <select id="color">
-                            <option value="Red">Red</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Green">Green</option>
-                            <option value="Black">Black</option>
+                            <!-- Color options will be populated dynamically -->
                         </select>
                     </div>
                 </div>
@@ -77,7 +72,7 @@
                     <button class="cart-button">Add to Cart</button>
                     <button class="wishlist-button">Add to Wishlist</button>
                 </div>
-                
+
                 <!-- Share Button -->
                 <div class="share">
                     <button class="share-button">Share</button>
@@ -86,7 +81,8 @@
                 <!-- Product Details -->
                 <div class="product-description">
                     <h2>Product Details</h2>
-                    <p>Detailed description of the product goes here. Include material, dimensions, and any other relevant information.</p>
+                    <p>Detailed description of the product goes here. Include material, dimensions, and any other
+                        relevant information.</p>
                 </div>
 
                 <!-- About the Item -->
@@ -122,37 +118,141 @@
             </div>
         </section>
 
-        <!-- Similar Products -->
-        <section class="similar-products">
-            <h2>Similar Products</h2>
-            <div class="product-grid">
-                <!-- Example Product Card -->
-                <div class="product-card">
-                    <img src="images/product2.jpg" alt="Product Image">
-                    <div class="product-info">
-                        <h3>Similar Product Name</h3>
-                        <p>Price: $25.99</p>
-                        <button class="buy-button">View Product</button>
-                    </div>
-                </div>
-                <div class="product-grid">
-                    <!-- Example Product Card -->
-                    <div class="product-card">
-                        <img src="images/product2.jpg" alt="Product Image">
-                        <div class="product-info">
-                            <h3>Similar Product Name</h3>
-                            <p>Price: $25.99</p>
-                            <button class="buy-button">View Product</button>
-                        </div>
-                    </div>
-                <!-- Add more product cards as needed -->
+        <section id="recommendations-section">
+            <h2>Similar products</h2>
+            <div id="recommendations" class="product-grid">
+                <!-- Recommended products will be dynamically injected here -->
             </div>
         </section>
+
     </main>
 
     <footer>
         <!-- Footer Content -->
-        <p>&copy; 2024 Your Marketplace. All rights reserved.</p>
+        <p>&copy; 2024 Stylsia. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript for Fetching Product Data -->
+    <script>
+        // Function to fetch product data by ID
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the product ID from the URL query string
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (productId) {
+                // Fetch product details from the backend
+                fetch(`http://localhost:5000/api/products/${productId}`)
+                    .then(response => response.json())
+                    .then(product => {
+                        // Populate the product page with fetched data
+                        document.querySelector('.product-image').src = `http://localhost:5000/images/${product.images[0]}`;
+                        document.querySelector('h1').textContent = product.name;
+                        document.querySelector('.product-info p:nth-child(2)').textContent = `Product Code: ${product.productCode}`;
+                        document.querySelector('.product-info p:nth-child(3)').textContent = `Seller Name: ${product.sellerName}`;
+                        document.querySelector('.product-info p:nth-child(4)').textContent = `Average Rating: ⭐⭐⭐⭐☆ (${product.averageRating})`;
+                        document.querySelector('.product-info p:nth-child(5)').textContent = `No. of People Who Bought It: ${product.numberOfPeopleBought}`;
+                        document.querySelector('.product-info p:nth-child(6)').innerHTML = `<strong>Price:</strong> <span class="old-price">$${product.price}</span> $${product.price - (product.price * (product.discount / 100))}`;
+                        document.querySelector('.product-info p:nth-child(7)').textContent = `Discount: ${product.discount}% Off`;
+
+                        // Populate size and color options
+                        const sizeSelect = document.querySelector('#size');
+                        product.sizeOptions.forEach(size => {
+                            const option = document.createElement('option');
+                            option.value = size;
+                            option.textContent = size;
+                            sizeSelect.appendChild(option);
+                        });
+
+                        const colorSelect = document.querySelector('#color');
+                        product.colorOptions.forEach(color => {
+                            const option = document.createElement('option');
+                            option.value = color;
+                            option.textContent = color;
+                            colorSelect.appendChild(option);
+                        });
+
+                        // Populate product description and seller details
+                        document.querySelector('.product-description p').textContent = product.description;
+                        document.querySelector('.about-seller p').textContent = `Details about the seller: ${product.sellerName}`;
+                    })
+                    .catch(error => console.error('Error fetching product details:', error));
+            } else {
+                console.error('No product ID found in URL');
+            }
+        });
+    </script>
+    <script>
+        // Function to track user activity
+        function trackActivity(activityType, activityDetails, tags) {  // Include tags
+            const token = localStorage.getItem('token');  // Fetch JWT token from localStorage
+            if (token) {
+                fetch('http://localhost:5000/api/users/activity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`  // Pass the JWT token in the Authorization header
+                    },
+                    body: JSON.stringify({
+                        activityType,  // Type of activity (e.g., "Product View")
+                        activityDetails,  // Additional details, such as the product ID
+                        tags  // Pass product tags as an array
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => console.log('Activity logged:', data))
+                    .catch(error => console.error('Error logging activity:', error));  // Handle error
+            }
+        }
+
+        // Example: Track product view when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            const productId = 'PRODUCT_ID';  // Replace with actual product ID dynamically
+            const productTags = ['polo', 'black', 'old money', 'cotton blend'];  // Replace with actual product tags dynamically
+            trackActivity('Product View', `User viewed product with ID: ${productId}`, productTags);  // Pass tags
+        });
+
+    </script>
+    <script src="auth.js"></script>
+    <script>
+        // Function to fetch and display product recommendations
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/recommendations', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+
+                    const recommendations = await response.json();
+
+                    if (response.ok) {
+                        // Display the recommended products
+                        const recommendationsContainer = document.getElementById('recommendations');
+                        recommendations.forEach(product => {
+                            const productCard = `
+                                <div class="product-card">
+                                    <img src="http://localhost:5000/images/${product.images[0]}" alt="${product.name}">
+                                    <h3>${product.name}</h3>
+                                    <p>Price: $${product.price}</p>
+                                    <button onclick="location.href='product.html?id=${product._id}'">View Product</button>
+                                </div>
+                            `;
+                            recommendationsContainer.innerHTML += productCard;
+                        });
+                    } else {
+                        console.error('Error fetching recommendations:', recommendations.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        });
+    </script>
+
 </body>
+
 </html>

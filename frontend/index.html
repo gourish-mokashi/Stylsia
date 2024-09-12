@@ -61,38 +61,13 @@
     </section>
 
     <!-- New Arrivals Section -->
-    <section id="new-arrivals">
-        <h2>New Arrivals</h2>
-        <div class="product-card">
-            <a href="product.html" class="style-link">
-                <img src="images/new1.jpg" alt="Product 1"></a>
-            <h3>Casual Denim Jacket</h3>
-            <p>$49.99</p>
-            <a href="product.html" class="buy-now">Buy Now</a>
-        </div>
-        <div class="product-card">
-            <a href="product.html" class="style-link">
-                <img src="images/new2.jpg" alt="Product 2"></a>
-            <h3>Floral Summer Dress</h3>
-            <p>$39.99</p>
-            <a href="product.html" class="buy-now">Buy Now</a>
+    <section id="latest-products">
+        <h2>Latest Products</h2>
+        <div id="latest-products-container" class="product-grid">
+            <!-- Latest products will be dynamically loaded here -->
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials">
-        <h2>What Our Customers Say</h2>
-        <blockquote>
-            <p>"I love the unique styles available on Your Marketplace! It's my go-to place for finding outfits that
-                match my personality."</p>
-            <cite>- Sarah J.</cite>
-        </blockquote>
-        <blockquote>
-            <p>"Great quality and fast delivery. Highly recommend this platform to anyone looking for stylish clothes!"
-            </p>
-            <cite>- Michael K.</cite>
-        </blockquote>
-    </section>
 
     <!-- Footer Section -->
     <footer>
@@ -104,39 +79,39 @@
             <a href="#"><img src="images/twitter-icon.svg" alt="Twitter"></a>
         </div>
     </footer>
-
     <script>
-        // Function to fetch products from the backend
-        async function fetchProducts() {
-            try {
-                const response = await fetch('http://localhost:5000/api/products');
-                const products = await response.json();
+        // Function to fetch recent products
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('http://localhost:5000/api/products/recent')
+                .then(response => response.json())
+                .then(products => {
+                    const productsContainer = document.getElementById('latest-products-container');
 
-                // Get the container element where products will be displayed
-                const productsContainer = document.getElementById('products-container');
+                    // Clear existing products if any
+                    productsContainer.innerHTML = '';
 
-                // Clear existing content
-                productsContainer.innerHTML = '';
+                    // Iterate over each product and create a card
+                    products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
 
-                // Loop through products and add to the DOM
-                products.forEach(product => {
-                    const productCard = document.createElement('div');
-                    productCard.className = 'product-card';
-                    productCard.innerHTML = `
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        <p>Price: $${product.price}</p>
-                    `;
-                    productsContainer.appendChild(productCard);
-                });
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        }
+                        productCard.innerHTML = `
+                            <img src="http://localhost:5000/images/${product.images[0]}" alt="${product.name}">
+                            <div class="product-info">
+                                <h3>${product.name}</h3>
+                                <p>Price: $${product.price}</p>
+                                <button class="buy-button" onclick="location.href='product.html?id=${product._id}'">View Product</button>
+                            </div>
+                        `;
 
-        // Call the function to fetch products when the page loads
-        window.onload = fetchProducts;
+                        productsContainer.appendChild(productCard);
+                    });
+                })
+                .catch(error => console.error('Error fetching recent products:', error));
+        });
     </script>
+    <script src="auth.js"></script>
+
 
 </body>
 

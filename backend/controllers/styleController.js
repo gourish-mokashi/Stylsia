@@ -27,23 +27,24 @@ const getStyleById = async (req, res) => {
 
 // Create a new style
 const createStyle = async (req, res) => {
-  const { id, name, description, imageUrl, products } = req.body;  // Ensure imageUrl is destructured here
-
   try {
-    const style = new Style({
-      id,            // Use the id from the request body
-      name,          // Use the name from the request body
-      description,   // Use the description from the request body
-      imageUrl,      // Use the imageUrl from the request body
-      products       // Use the products array from the request body
-    });
-
-    const savedStyle = await style.save();
-    res.status(201).json(savedStyle);
+    // Check if the request body is an array
+    if (Array.isArray(req.body)) {
+      // Handle batch insert
+      const styles = await Style.insertMany(req.body);
+      res.status(201).json(styles);
+    } else {
+      // Handle single object case (optional)
+      const { id, name, description, imageUrl, products } = req.body;
+      const style = new Style({ id, name, description, imageUrl, products });
+      const savedStyle = await style.save();
+      res.status(201).json(savedStyle);
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 // Update a style

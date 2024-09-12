@@ -31,11 +31,17 @@ const productSchema = new mongoose.Schema({
     default: 0
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   images: [{
-    type: String
+    type: String,
+    required: true
   }],
+  tags: [{
+    type: String,  // Tags like "polo", "black", "old money"
+    required: true,
+}],
   stock: {
     type: Number,
     required: true
@@ -52,6 +58,4 @@ const productSchema = new mongoose.Schema({
   }
 });
 
-const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
-
-module.exports = Product;
+module.exports = mongoose.models.Product || mongoose.model('Product', productSchema);

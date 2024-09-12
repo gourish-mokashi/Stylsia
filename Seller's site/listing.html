@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Product Listing Page</h1>
+
+        <!-- Product Title -->
+        <div class="form-group">
+            <label for="product-title">Product Title</label>
+            <input type="text" id="product-title" name="product-title" placeholder="Enter product title">
+        </div>
+
+        <!-- Product Description -->
+        <div class="form-group">
+            <label for="product-description">Product Description</label>
+            <textarea id="product-description" name="product-description" rows="4"
+                placeholder="Enter product description"></textarea>
+        </div>
+
+        <!-- Product Category -->
+        <div class="form-group">
+            <label for="product-category">Product Category</label>
+            <select id="product-category" name="product-category">
+                <option value="mens-clothing">Men's Clothing</option>
+                <option value="womens-clothing">Women's Clothing</option>
+                <option value="kids-wear">Kids' Wear</option>
+                <option value="accessories">Accessories</option>
+            </select>
+        </div>
+
+        <!-- Product Images -->
+        <div class="form-group">
+            <label for="product-images">Product Images</label>
+            <input type="file" id="product-images" name="product-images" multiple>
+        </div>
+
+        <!-- Pricing and Discounts -->
+        <div class="form-group">
+            <label for="product-price">Product Price</label>
+            <input type="number" id="product-price" name="product-price" placeholder="Enter product price">
+        </div>
+        <div class="form-group">
+            <label for="product-discount">Discount (%)</label>
+            <input type="number" id="product-discount" name="product-discount" placeholder="Enter discount percentage">
+        </div>
+
+        <!-- Stock Management -->
+        <div class="form-group">
+            <label for="stock-quantity">Stock Quantity</label>
+            <input type="number" id="stock-quantity" name="stock-quantity" placeholder="Enter stock quantity">
+        </div>
+        <div class="form-group">
+            <label for="low-stock-alert">Low Stock Alert</label>
+            <input type="number" id="low-stock-alert" name="low-stock-alert" placeholder="Enter low stock alert level">
+        </div>
+
+        <!-- SKU and Barcodes -->
+        <div class="form-group">
+            <label for="sku">SKU (Stock Keeping Unit)</label>
+            <input type="text" id="sku" name="sku" placeholder="Enter SKU">
+        </div>
+
+        <!-- Size and Color Variants -->
+        <div class="form-group">
+            <label for="size-variant">Size Variant</label>
+            <input type="text" id="size-variant" name="size-variant"
+                placeholder="Enter size variant (e.g., Small, Medium)">
+        </div>
+        <div class="form-group">
+            <label for="color-variant">Color Variant</label>
+            <input type="text" id="color-variant" name="color-variant"
+                placeholder="Enter color variant (e.g., Red, Blue)">
+        </div>
+
+        <!-- Shipping Details -->
+        <div class="form-group">
+            <label for="shipping-options">Shipping Options</label>
+            <input type="text" id="shipping-options" name="shipping-options" placeholder="Enter shipping options">
+        </div>
+        <div class="form-group">
+            <label for="shipping-cost">Shipping Cost</label>
+            <input type="number" id="shipping-cost" name="shipping-cost" placeholder="Enter shipping cost">
+        </div>
+
+        <!-- Product Condition -->
+        <div class="form-group">
+            <label for="product-condition">Product Condition</label>
+            <select id="product-condition" name="product-condition">
+                <option value="new">New</option>
+                <option value="used">Used</option>
+                <option value="refurbished">Refurbished</option>
+            </select>
+        </div>
+
+        <!-- SEO Settings -->
+        <div class="form-group">
+            <label for="seo-title">SEO Title</label>
+            <input type="text" id="seo-title" name="seo-title" placeholder="Enter SEO title">
+        </div>
+        <div class="form-group">
+            <label for="seo-description">SEO Description</label>
+            <textarea id="seo-description" name="seo-description" rows="2"
+                placeholder="Enter SEO description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="seo-keywords">SEO Keywords</label>
+            <input type="text" id="seo-keywords" name="seo-keywords" placeholder="Enter SEO keywords">
+        </div>
+
+        <!-- Return and Exchange Policy -->
+        <div class="form-group">
+            <label for="return-policy">Return and Exchange Policy</label>
+            <textarea id="return-policy" name="return-policy" rows="3"
+                placeholder="Enter return and exchange policy"></textarea>
+        </div>
+
+        <!-- Product Tags -->
+        <div class="form-group">
+            <label for="product-tags">Product Tags</label>
+            <input type="text" id="product-tags" name="product-tags" placeholder="Enter product tags">
+        </div>
+
+        <!-- Compliance and Certifications -->
+        <div class="form-group">
+            <label for="compliance-certifications">Compliance and Certifications</label>
+            <input type="file" id="compliance-certifications" name="compliance-certifications" multiple>
+        </div>
+
+        <!-- Save as Draft / Publish Options -->
+        <div class="form-group">
+            <button type="button" id="save-draft" class="btn">Save as Draft</button>
+            <button type="button" id="publish" class="btn">Publish</button>
+        </div>
+    </div>
+</body>
+
+</html>

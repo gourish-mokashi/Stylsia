@@ -27,22 +27,27 @@ const getProductById = async (req, res) => {
 
 // Create a new product
 const createProduct = async (req, res) => {
-  const { name, productCode, sellerName, price, stock, sizeOptions, colorOptions } = req.body;
-  try {
-    const product = new Product({
-      name,
-      productCode,
-      sellerName,
-      price,
-      stock,
-      sizeOptions,
-      colorOptions
-    });
+  const { name, productCode, sellerName, price, discount, description, images,  tags, stock, sizeOptions, colorOptions } = req.body;
 
-    const savedProduct = await product.save();
-    res.status(201).json(savedProduct);
+  try {
+      const product = new Product({
+          name,
+          productCode,
+          sellerName,
+          price,
+          discount,
+          description,
+          images,
+          tags,
+          stock,
+          sizeOptions,
+          colorOptions
+      });
+
+      const savedProduct = await product.save();
+      res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
   }
 };
 
@@ -84,5 +89,27 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct };
+// Get the most recent products
+const getRecentProducts = async (req, res) => {
+  try {
+      // Fetch the latest 5 products sorted by creation date
+      const recentProducts = await Product.find().sort({ createdAt: -1 }).limit(5);
+      res.status(200).json(recentProducts);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
+// Get the most trending products
+const getTrendingProducts = async (req, res) => {
+    try {
+        // Fetch products sorted by the number of purchases, limit to top 5
+        const trendingProducts = await Product.find().sort({ numberOfPeopleBought: -1 }).limit(5);
+        res.status(200).json(trendingProducts);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct, getRecentProducts, getTrendingProducts};
 

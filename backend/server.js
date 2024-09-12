@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const { protect } = require('./middleware/authMiddleware');
+const path = require('path');
 
 
 // Load environment variables
@@ -19,15 +20,16 @@ const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const styleRoutes = require('./routes/styleRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 
 // Initialize Express app
 const app = express();
 
-// Serve static files from the 'public' directory
-app.use('/images', express.static('images'));
-
 // Add this line to parse JSON bodies
 app.use(express.json());
+
+// Serve static files from the 'images' directory
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Middleware
 app.use(cors({
@@ -40,7 +42,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/styles', styleRoutes);
+app.use('/api/users', require('./routes/userRoutes')); 
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/recommendations', recommendationRoutes);
+
 
 // Connect to the database
 connectDB();
@@ -63,6 +68,5 @@ app.listen(PORT, () => {
 });
 
 
-// In server.js
-app.use('/api/users', require('./routes/userRoutes')); 
+
 
